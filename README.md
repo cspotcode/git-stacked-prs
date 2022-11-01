@@ -27,6 +27,10 @@ and then those changes to `pr-stack/1` should be merged/rebased into `pr-stack/2
 It will (interactively) do all the necessary merging/rebasing and pushing for
 all branches in the DAG.
 
+It can also create and manage github PRs.  If you change the config file, it can update
+the upstream branch for each PR.  From the example above, if `pr-stack/1` is merged to `main`, then you
+want to change the upstream of `pr-stack/2`'s PR to `main`.
+
 Quick-reference of commands:
 
 ```shell

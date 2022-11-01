@@ -9,7 +9,9 @@ found `git machete` which is most of the way there.
 ## `git machete`
 
 `git machete` uses a single config file describing a DAG of branches.  Each
-branch has an upstream.  In the typical workflow, all topic branches have the
+branch has an upstream.
+
+In the typical workflow *without* stacked PRs, all topic branches have the
 same upstream: `main` or `master`.  But with stacked PRs, the first branch in a
 stack is the upstream of the second, and so on.  The DAG is the easiest way to
 describe this relationship.
@@ -21,8 +23,14 @@ main
         pr-stack/2
 ```
 
-Git machete understands that any changes to `main` should be merged/rebased into `pr-stack/1`,
-and then those changes to `pr-stack/1` should be merged/rebased into `pr-stack/2`.
+Git machete understands that:
+- upstream changes should be (recursively) merged into downstreams:
+    - anything new on `main` should be merged/rebased into `pr-stack/1`
+    - next, `pr-stack/1` should be merged/rebased into `pr-stack/2`
+- 2x PRs should exist:
+    - one merging `pr-stack/1` into `main`
+    - one merging `pr-stack/2` into `pr-stack/1`.  This means code review sees
+    only the changes from `pr-stack/2`
 
 It will (interactively) do all the necessary merging/rebasing and pushing for
 all branches in the DAG.

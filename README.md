@@ -8,6 +8,8 @@ found `git machete` which is most of the way there.
 
 ## `git machete`
 
+https://git-machete.readthedocs.io/en/stable/
+
 `git machete` uses a single config file describing a DAG of branches.  Each
 branch has an upstream.
 
